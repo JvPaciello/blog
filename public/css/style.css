@@ -1,0 +1,50 @@
+body {
+  background-color: #DAD7CD;
+}
+
+.navbar{
+    background-color: #1F3D2B;
+    padding: 20px;
+}
+
+.navbar-branding{
+    color: white;
+    transition: color 0.5s ease-in-out;
+    text-decoration: none;
+}
+
+.navbar-branding:hover{
+    text-decoration: none;
+    color: #A3B18A;
+}
+
+.navbar-branding h3{
+    font-weight: 1000;
+}
+
+.btn.btn-sucess{
+    background-color: #5F8D4E;
+    color: white;
+}
+
+.btn.btn-sucess:hover{
+    background-color: #3A5A40;
+}
+
+h2{
+    color: #3A5A40;
+}
+
+.card-body{
+    margin: 10px;
+}
+
+.container{
+    margin-top: 14vh;
+    margin-bottom: 14vh;
+}
+
+.form-control:focus {
+  border-color: #5F8D4E;     
+  box-shadow: 0 0 0 0.2rem rgba(95, 141, 78, 0.25);
+}
