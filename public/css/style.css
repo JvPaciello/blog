@@ -1,21 +1,27 @@
 body {
-  background-color: #DAD7CD;
+  background-color: #f5f7f6;
 }
 
 .navbar{
-    background-color: #1F3D2B;
+    background-color: #1f3d2b;
     padding: 20px;
 }
 
 .navbar-branding{
-    color: white;
-    transition: color 0.5s ease-in-out;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  border-left: 6px solid #2f6f4e;
+  padding-left: 12px;
+}
+
+a{
+    border: none;
     text-decoration: none;
 }
 
 .navbar-branding:hover{
-    text-decoration: none;
-    color: #A3B18A;
+    color: #5F8D4E;
 }
 
 .navbar-branding h3{
@@ -33,6 +39,12 @@ body {
 
 h2{
     color: #3A5A40;
+}
+
+
+.card{
+  border-radius: 10px;
+  border: none;
 }
 
 .card-body{
