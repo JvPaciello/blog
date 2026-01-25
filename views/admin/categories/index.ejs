@@ -1,0 +1,31 @@
+<%-include('../../partials/header')%>
+<%-include('../../partials/navbar')%>
+<div class="container">
+    <div class="card">
+
+    <div class="card-body">
+    <h2>Categorias</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(category=>{%>
+            <tr>
+                <th><%=category.id%></th>
+                <th><%=category.title%></th>
+                <th><%=category.slug%></th>
+                <th></th>
+            </tr>                
+            <%}) %>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+<%-include('../../partials/footer')%>
