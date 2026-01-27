@@ -32,4 +32,18 @@ router.get("/admin/categories", (req,res)=>{
   });
 });
 
+router.post("/categories/delete", (req,res) =>{
+  var id = Number(req.body.id);
+  if(!id||isNaN(id)){
+    return res.redirect("/admin/categories");
+  }
+  Category.destroy({
+    where:{
+      id: id
+    }
+  }).then(()=>{
+    res.redirect("/admin/categories");
+  });
+});
+
 module.exports = router;
