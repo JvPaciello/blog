@@ -21,7 +21,7 @@ router.post("/categories/save", (req, res) => {
       strict: true,
     }),
   }).then(() => {
-    res.redirect("/");
+    res.redirect("/admin/categories");
   });
 });
 
@@ -45,5 +45,48 @@ router.post("/categories/delete", (req,res) =>{
     res.redirect("/admin/categories");
   });
 });
+
+router.get("/admin/categories/edit/:id", (req, res) => {
+  var id = Number(req.params.id);
+
+  if(isNaN(id)){
+    return res.redirect("/admin/categories");
+  }
+
+  Category.findByPk(id).then(category => {
+    if (category != undefined) {
+      res.render("admin/categories/edit", {category: category});
+    } else {
+      res.redirect("/admin/categories");
+    }
+  }).catch(erro => {
+    res.redirect("/admin/categories");
+  });
+});
+
+router.post("/categories/update", (req,res)=>{
+  var id = Number(req.body.id);
+  var title = (req.body.title||"").trim();
+
+
+  if(!title){
+    return res.redirect("/admin/categories/edit/"+id);
+  }
+  Category.update({
+    title: title,
+    slug: slugify(title,{
+      lower: true,
+      strict: true
+    })
+  },{
+    where: 
+    {
+      id: id
+    }
+  }).then(()=>{
+    res.redirect("/admin/categories");
+  })
+});
+
 
 module.exports = router;
