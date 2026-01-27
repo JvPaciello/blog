@@ -5,7 +5,7 @@
 
     <div class="card-body">
     <h2>Categorias</h2>
-    <a class="btn btn-sucess" href="/admin/categories/new">Criar nova categoria</a><hr>
+    <a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a><hr>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -18,13 +18,13 @@
         <tbody>
             <% categories.forEach(category=>{%>
             <tr>
-                <th><%=category.id%></th>
-                <th><%=category.title%></th>
-                <th><%=category.slug%></th>
+                <td><%=category.id%></td>
+                <td><%=category.title%></td>
+                <td><%=category.slug%></td>
                 <th>
                     <button class="btn btn-warning">Editar</button>
 
-                    <form method="POST" action="/categories/delete" style="display: inline;">
+                    <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="confirmDelete(event, this)">
                         <input type="hidden" name="id" value="<%= category.id %>">
                         <button class="btn btn-danger">Excluir</button>   
                     </form>
@@ -37,3 +37,14 @@
 </div>
 </div>
 <%-include('../../partials/footer')%>
+
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault()
+        var decision = confirm("Deletar categoria?");
+
+        if(decision){
+            form.submit();
+        }
+    }
+</script>
