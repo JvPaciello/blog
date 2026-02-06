@@ -73,6 +73,7 @@ h2 {
   padding-left: 12px;
   font-weight: bold;
   transition: transform 0.3s ease, color 0.3s ease;
+  padding-right: 30px;
 }
 
 .nav-item a:hover {
