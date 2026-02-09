@@ -22,7 +22,7 @@ a {
 }
 
 .navbar-branding:hover {
-  color: #5f8d4e;
+  color: #7fff51;
   transform: translateY(-3px);
 }
 
@@ -41,6 +41,14 @@ a {
 
 h2 {
   color: #3a5a40;
+}
+
+h1{
+  color: #5f8d4e;
+}
+
+.card-header{
+  background-color: #1f3d2b;
 }
 
 .card {
@@ -69,7 +77,7 @@ h2 {
 
 .nav-item a {
   color: rgb(255, 255, 255);
-  border-left: 6px solid #00832c;
+  border-left: 2px solid #00832c;
   padding-left: 12px;
   font-weight: bold;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -77,8 +85,7 @@ h2 {
 }
 
 .nav-item a:hover {
-  transform: translateY(-3px);
-  color: #5f8d4e;
+  color: #65ff2e;
   
 }
 .nav-item a {
