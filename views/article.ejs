@@ -3,23 +3,19 @@
 <body>
     
     <div class="container">
-    <h1>Seja bem vindo ao blog!</h1>
-    <% articles.forEach(article => {%>
 
         <div class="card">
 
             <div class="card-header">
-                <h3 style="color:white;"><%= article.title %></h3>
+                <h3 style="color:white;"><%= article.title.toUpperCase() %></h3>
             </div>
 
             <div class="card-body">
-                <a class="btn btn-sucess" href="/<%=article.slug%>">Ler Artigo</a>
+                <%-article.body%>
             </div>
 
         </div>
-        <br>
 
-    <%})%>
     </div>
 </body>
 </html>
