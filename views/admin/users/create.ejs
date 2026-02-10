@@ -1,0 +1,23 @@
+
+<%-include('../../partials/header')%>
+<%-include('../../partials/navbar')%>
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 style="color: white;">Criação de usuário</h3>
+        </div>
+        <div class="card-body">
+            <form action="/users/save" method="post">
+                <input class="form-control" name="email"  type="email" placeholder="Digite seu email"><br>
+                <input class="form-control" type="password" name="password" placeholder="********"><br>
+                <button type="submit" class="btn btn-success w-100">Criar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%-include('../../partials/footer')%>
