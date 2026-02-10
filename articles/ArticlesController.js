@@ -106,4 +106,37 @@ router.post("/articles/update",(req,res)=>{
 
 });
 
+
+router.get("/articles/page/:num", (req, res) => {
+  const page = Number(req.params.num);
+  const limit = 4;
+
+  const offset = page > 1 ? (page - 1) * limit : 0;
+
+  Article.findAndCountAll({
+    limit,
+    offset,
+        order:[[
+      'id','DESC'
+    ]]
+  }).then(articles => {
+
+    const next = offset + limit < articles.count;
+
+    const result = {
+      page: Number(page),
+      next,
+      articles
+    };
+
+    Category.findAll().then(categories => {
+      return res.render("admin/articles/page", {
+        result,
+        categories
+      });
+    });
+  });
+});
+
+
 module.exports = router;
