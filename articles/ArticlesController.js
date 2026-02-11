@@ -139,5 +139,50 @@ router.get("/articles/page/:num", (req, res) => {
   });
 });
 
+router.get("/category/:slug/page/:num", (req, res) => {
+
+  const slug = req.params.slug;
+  const page = Number(req.params.num);
+  const limit = 4;
+
+  const offset = page > 1 ? (page - 1) * limit : 0;
+
+  Category.findOne({
+    where: { slug: slug }
+  }).then(category => {
+
+    if(!category){
+      return res.redirect("/");
+    }
+
+    Article.findAndCountAll({
+      where: { categoryId: category.id },
+      limit,
+      offset,
+      order: [['id', 'DESC']]
+    }).then(articles => {
+
+      const next = offset + limit < articles.count;
+
+      const result = {
+        page,
+        next,
+        articles
+      };
+
+      Category.findAll().then(categories => {
+        res.render("index", {
+          result,
+          categories,
+          currentCategory: category
+        });
+      });
+
+    });
+
+  });
+
+});
+
 
 module.exports = router;

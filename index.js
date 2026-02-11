@@ -42,63 +42,76 @@ app.use("/",(usersController));
 
 app.get("/", (req, res) => {
 
-  Article.findAll({
-    order:[[
-      'id','DESC'
-    ]],
-    limit:4
+  const limit = 4;
+  const offset = 0;
 
-  }).then(articles=>{
+  Article.findAndCountAll({
+    limit,
+    offset,
+    order: [['id','DESC']]
+  }).then(resultDB => {
 
-    Category.findAll().then(categories =>{
-      res.render("index", {articles: articles, categories: categories});
-    })
+    const next = limit < resultDB.count;
+
+    const result = {
+      page: 1,
+      next,
+      articles: resultDB.rows
+    };
+
+    Category.findAll().then(categories => {
+      res.render("index", {
+        result,
+        categories
+      });
+    });
+
   });
+
 });
 
-app.get("/:slug", (req,res)=>{
-  var slug = req.params.slug;
-  Article.findOne({
-    where:{
-      slug:slug
-    }
-  }).then(article=>{
-    if(article!=undefined){
-
-    return Category.findAll().then(categories =>{
-      res.render("article", {article: article, categories: categories});
-    })
-      
-    }
-    res.redirect("/");
-  }).catch(err =>{
-    res.redirect("/ ");
-  })
-})
 
 
 app.get("/category/:slug",(req,res)=>{
-  var slug = req.params.slug;
-  
+
+  const slug = req.params.slug;
+  const limit = 4;
+  const offset = 0;
+
   Category.findOne({
-    where:{
-      slug: slug
-    },
-    include:[{model: Article}]
-  }).then(category=>{
-    if(category!=undefined){
+    where:{ slug }
+  }).then(category => {
 
-
-      Category.findAll().then(categories=>{
-        res.render("index",{articles: category.articles, categories: categories});
-      })
-
-
+    if(!category){
+      return res.redirect("/");
     }
-    res.redirect("/");
-  }).catch(err =>{
-    res.redirect("");
-  })
+
+    Article.findAndCountAll({
+      where:{ categoryId: category.id },
+      limit,
+      offset,
+      order:[['id','DESC']]
+    }).then(resultDB => {
+
+      const next = limit < resultDB.count;
+
+      const result = {
+        page: 1,
+        next,
+        articles: resultDB.rows
+      };
+
+      Category.findAll().then(categories => {
+        res.render("index", {
+          result,
+          categories
+        });
+      });
+
+    });
+
+  });
+
 });
 
 
